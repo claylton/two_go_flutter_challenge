@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:two_go_flutter_challenge/ui/pages/cart_page.dart';
 import 'package:two_go_flutter_challenge/ui/themes/app_colors_theme.dart';
 import 'home_page.dart';
 
@@ -11,8 +12,8 @@ class TabsPage extends StatelessWidget {
       body: TabBarView(
         children: [
           const HomePage(),
+          const CartPage(),
           Container(color: Colors.blue),
-          Container(color: Colors.blueGrey),
         ],
       ),
       bottomNavigationBar: const TabBar(

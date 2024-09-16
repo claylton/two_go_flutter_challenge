@@ -31,14 +31,11 @@ class ProductItemWidget extends StatelessWidget {
         children: [
           GestureDetector(
             onTap: (){},
-            child: Hero(
-              tag: image,
-              child: Image.asset(
-                image,
-                width: 170,
-                height: 200,
-                fit: BoxFit.cover,
-              ),
+            child: Image.asset(
+              image,
+              width: 170,
+              height: 200,
+              fit: BoxFit.cover,
             ),
           ),
           const SizedBox(height: 10),
