@@ -1,46 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:two_go_flutter_challenge/model/product_model.dart';
+import 'package:two_go_flutter_challenge/ui/widgets/shared/loader_widget.dart';
 import 'product_item_widget.dart';
 
 class ProductListWidget extends StatelessWidget {
+  final List<ProductItemModel>? products;
 
-  const ProductListWidget({ super.key });
+  const ProductListWidget({
+    Key? key,
+    required this.products,
+  }) : super(key: key);
 
-   @override
-   Widget build(BuildContext context) {
-       return ListView(
-    scrollDirection: Axis.horizontal,
-    children: const [
-      ProductItemWidget(
-        title: "Item A",
-        description: "Nike",
-        image: "assets/product-10.png",
-        price: 150,
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      // height: 410,
+      child: LoaderWidget(
+        object: products,
+        callback: list,
       ),
-      ProductItemWidget(
-        title: "Item B",
-        description: "Bang and Olufsen",
-        image: "assets/product-1.png",
-        price: 755,
-      ),
-      ProductItemWidget(
-        title: "Item C",
-        description: "Tag Heuer",
-        image: "assets/product-2.png",
-        price: 450,
-      ),
-      ProductItemWidget(
-        title: "Item D",
-        description: "Google Inc.",
-        image: "assets/product-3.png",
-        price: 900,
-      ),
-      ProductItemWidget(
-        title: "Item E",
-        description: "Smart Inc.",
-        image: "assets/product-4.png",
-        price: 1000,
-      ),
-    ],
-  );
+    );
+  }
+
+  Widget list() {
+    return ListView.builder(
+      scrollDirection: Axis.horizontal,
+      itemCount: products?.length,
+      itemBuilder: (context, index) {
+        return Padding(
+          padding: const EdgeInsets.all(5),
+          child: ProductItemWidget(
+            item: products![index],
+          ),
+        );
+      },
+    );
   }
 }

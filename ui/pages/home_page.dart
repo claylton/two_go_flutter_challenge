@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:two_go_flutter_challenge/blocs/home_bloc.dart';
+import 'package:two_go_flutter_challenge/ui/widgets/product/product_list_widget.dart';
 import 'package:two_go_flutter_challenge/widgets/category/category_list_widget.dart';
-import '../widgets/product/product_list_widget.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final HomeBloc bloc = Provider.of<HomeBloc>(context);
     return Scaffold(
       body: Container(
         padding: const EdgeInsets.all(15),
@@ -34,9 +37,9 @@ class HomePage extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 10),
-            const SizedBox(
+            SizedBox(
               height: 350,
-              child: ProductListWidget(),
+              child: ProductListWidget(products: bloc.products),
             )
           ],
         ),

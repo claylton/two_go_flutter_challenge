@@ -1,20 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:two_go_flutter_challenge/model/product_model.dart';
 import 'package:two_go_flutter_challenge/ui/themes/app_colors_theme.dart';
 import 'package:intl/intl.dart';
 import 'package:two_go_flutter_challenge/ui/widgets/shared/add_to_cart_widget.dart';
 
 class ProductItemWidget extends StatelessWidget {
-  final String image;
-  final String title;
-  final String description;
-  final double price;
-
+  final ProductItemModel item;
   const ProductItemWidget({
     super.key,
-    required this.image,
-    required this.title,
-    required this.description,
-    required this.price,
+    required this.item,
   });
 
   @override
@@ -27,49 +21,56 @@ class ProductItemWidget extends StatelessWidget {
       width: 170,
       color: Colors.black12,
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          GestureDetector(
-            onTap: (){},
-            child: Image.asset(
-              image,
-              width: 170,
-              height: 200,
-              fit: BoxFit.cover,
-            ),
-          ),
-          const SizedBox(height: 10),
-          SizedBox(
-            height: 30,
-            child: Text(
-              title,
-              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w300),
-            ),
-          ),
-          const SizedBox(height: 5),
-          Text(
-            description,
-            style: const TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w300,
-            ),
-          ),
-          const SizedBox(height: 5),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Expanded(
-                child: Text(
-                  "R\$ ${priceFormat.format(price)}",
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: AppColorsTheme.primaryColor,
-                  ),
+              GestureDetector(
+                onTap: () {},
+                child: Image.network(
+                  item.imagePath,
+                  width: 170,
+                  height: 200,
+                  fit: BoxFit.cover,
                 ),
               ),
-              const AddToCartWidget()
+              const SizedBox(height: 10),
+              SizedBox(
+                height: 30,
+                child: Text(
+                  item.title,
+                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w300),
+                ),
+              ),
+              const SizedBox(height: 5),
+              Text(
+                item.discountInfo,
+                style: const TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w300,
+                ),
+              ),
             ],
+          ),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 5),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  child: Text(
+                    "R\$ ${priceFormat.format(item.price)}",
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: AppColorsTheme.primaryColor,
+                    ),
+                  ),
+                ),
+                AddToCartWidget(item: item)
+              ],
+            ),
           ),
         ],
       ),

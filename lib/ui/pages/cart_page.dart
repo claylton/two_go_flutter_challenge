@@ -1,19 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
+import 'package:two_go_flutter_challenge/blocs/cart_bloc.dart';
+import 'package:two_go_flutter_challenge/model/product_model.dart';
 import 'package:two_go_flutter_challenge/ui/themes/app_colors_theme.dart';
+import 'package:two_go_flutter_challenge/ui/widgets/shared/cart_item_widget.dart';
+import 'package:two_go_flutter_challenge/ui/widgets/shared/loader_widget.dart';
 
+// ignore: must_be_immutable
 class CartPage extends StatelessWidget {
-  const CartPage({super.key});
+  late CartBloc bloc;
+  final price = NumberFormat("#,##0.00", "pt_BR");
+  List<ProductItemModel> items = <ProductItemModel>[];
+
+  CartPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    bloc = Provider.of<CartBloc>(context);
+    items = bloc.cart;
+    
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Expanded(
-            child: Container(
-              child: productList(context),
+            child: LoaderWidget(
+              object: bloc.cart,
+              callback: cartItemList,
             ),
           ),
           Container(
@@ -22,17 +36,17 @@ class CartPage extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Padding(
-                  padding: EdgeInsets.only(left: 20, top: 15),
+                Padding(
+                  padding: const EdgeInsets.only(left: 20, top: 15),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
+                      const Text(
                         "TOTAL",
                       ),
                       Text(
-                        "\$4250",
-                        style: TextStyle(
+                        "R\$ ${price.format(bloc.total)}",
+                        style: const TextStyle(
                           color: AppColorsTheme.primaryColor,
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
@@ -62,86 +76,19 @@ class CartPage extends StatelessWidget {
       ),
     );
   }
-}
 
-Widget productList(BuildContext context) {
-  return ListView(children: [
-    productItem(context),
-    productItem(context),
-    productItem(context),
-  ]);
-}
-
-Widget productItem(BuildContext context) {
-  final priceFormat = NumberFormat('#,##0.00', 'pt_BR');
-
-  return Container(
-    height: 120,
-    margin: const EdgeInsets.all(5),
-    child: Row(
-      children: [
-        Container(
-          width: 100,
-          height: 100,
-          margin:const  EdgeInsets.all(10),
-          child: Image.asset(
-            "assets/product-1.png",
-            fit: BoxFit.fitWidth,
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(
-            top: 20,
-            left: 10,
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text("Título do produto"),
-              Text(
-                "R\$ ${priceFormat.format(200)}",
-                style: const TextStyle(
-                  color: AppColorsTheme.primaryColor,
-                ),
-              ),
-              const SizedBox(height: 10),
-              Container(
-                height: 35,
-                width: 120,
-                decoration: BoxDecoration(
-                  color: Colors.black12,
-                  borderRadius: BorderRadius.circular(6),
-                ),
-                child: Row(
-                  children: [
-                    Container(
-                      width: 40,
-                      alignment: Alignment.center,
-                      child: TextButton(
-                        onPressed: () {},
-                        child: const Text("-", textAlign: TextAlign.center),
-                      ),
-                    ),
-                    Container(
-                      width: 40,
-                      alignment: Alignment.center,
-                      child: const Text("1"),
-                    ),
-                    Container(
-                      width: 40,
-                      alignment: Alignment.center,
-                      child: TextButton(
-                        onPressed: () {},
-                        child: const Text("+", textAlign: TextAlign.center),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        )
-      ],
-    ),
-  );
+  Widget cartItemList() {
+    return ListView.builder(
+      scrollDirection: Axis.vertical,
+      itemCount: items.length,
+      itemBuilder: (context, index) {
+        return Dismissible(
+          key: Key(items[index].id),
+          onDismissed: (direction) => bloc.remove(items[index]),
+          background: Container(color: Colors.red.withOpacity(0.1)),
+          child: CartItemWidget(item: items[index]),
+        );
+      },
+    );
+  }
 }
