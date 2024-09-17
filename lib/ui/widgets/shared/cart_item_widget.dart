@@ -28,7 +28,6 @@ class CartItemWidget extends StatelessWidget {
             width: 100,
             height: 100,
             margin: const EdgeInsets.all(10),
-            color: Colors.blue,
             child: Image.network(item.imagePath, fit: BoxFit.fitWidth),
           ),
           Expanded(
@@ -42,7 +41,7 @@ class CartItemWidget extends StatelessWidget {
                 children: [
                   Text(item.title),
                   Text(
-                    "R\$ ${price.format(item.price)}",
+                    item.promotion ? "Promoção aplicada" : "R\$ ${price.format(item.price)}",
                     style: TextStyle(color: Theme.of(context).primaryColor),
                   ),
                   const SizedBox(height: 10),

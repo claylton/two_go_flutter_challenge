@@ -22,6 +22,7 @@ class AddToCartWidget extends StatelessWidget {
       imagePath: item.imagePath,
       discountInfo: item.discountInfo,
       discountType: item.discountType,
+      promotion: false
     );
 
     if (!bloc.itemInCart(cartItem)) {

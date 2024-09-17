@@ -6,6 +6,7 @@ class ProductItemModel {
   int discountType;
   final double price;
   int quantity;
+  bool promotion;
 
   ProductItemModel({
     required this.id,
@@ -15,6 +16,7 @@ class ProductItemModel {
     required this.discountType,
     required this.price,
     required this.quantity,
+    required this.promotion,
   });
 
   factory ProductItemModel.fromJson(Map<String, dynamic> json) {
@@ -26,6 +28,7 @@ class ProductItemModel {
       discountType: json['discountType'],
       price: json['price'].toDouble(),
       quantity: json['quantity'],
+      promotion: json['promotion'],
     );
   }
 
@@ -38,6 +41,7 @@ class ProductItemModel {
       'discountType': discountType,
       'price': price,
       'quantity': quantity,
+      'promotion': promotion
     };
   }
 }
