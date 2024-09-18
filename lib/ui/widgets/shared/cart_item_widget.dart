@@ -21,14 +21,18 @@ class CartItemWidget extends StatelessWidget {
 
     return Container(
       // height: 160,
+      width: double.infinity,
       margin: const EdgeInsets.all(5),
       child: Row(
         children: [
           Container(
-            width: 100,
-            height: 100,
+            width: MediaQuery.of(context).size.width * 0.2,
+            height: MediaQuery.of(context).size.width * 0.4,
             margin: const EdgeInsets.all(10),
-            child: Image.network(item.imagePath, fit: BoxFit.fitWidth),
+            child: Image.network(
+              item.imagePath,
+              fit: BoxFit.cover,
+            ),
           ),
           Expanded(
             child: Padding(
@@ -66,35 +70,27 @@ class CartItemWidget extends StatelessWidget {
                         ),
                   item.promotion
                       ? const Padding(
-                        padding: EdgeInsets.only(bottom: 5),
-                        child: Text(
+                          padding: EdgeInsets.only(bottom: 5),
+                          child: Text(
                             "Promoção aplicada",
                             style: TextStyle(color: AppColorsTheme.primaryColor),
                           ),
-                      )
+                        )
                       : const SizedBox(),
                   Container(
-                    height: 35,
-                    width: 120,
+                    // height: 35,
+                    width: MediaQuery.of(context).size.width * 0.4,
                     decoration: BoxDecoration(color: Colors.black12, borderRadius: BorderRadius.circular(5)),
                     child: Row(
                       children: [
-                        Container(
-                          width: 40,
-                          alignment: Alignment.center,
+                        Expanded(
                           child: TextButton(
                             child: const Text("-"),
                             onPressed: () => bloc.decrease(item),
                           ),
                         ),
-                        Container(
-                          width: 40,
-                          alignment: Alignment.center,
-                          child: Text(item.quantity.toString()),
-                        ),
-                        Container(
-                          width: 40,
-                          alignment: Alignment.center,
+                        Text(item.quantity.toString()),
+                        Expanded(
                           child: TextButton(
                             child: const Text("+"),
                             onPressed: () => bloc.increase(item),

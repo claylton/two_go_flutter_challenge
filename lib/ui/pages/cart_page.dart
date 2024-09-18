@@ -57,7 +57,7 @@ class CartPage extends StatelessWidget {
                 ),
                 Container(
                   height: 50,
-                  width: 150,
+                  width: MediaQuery.of(context).size.width * 0.4,
                   decoration: BoxDecoration(color: AppColorsTheme.primaryColor, borderRadius: BorderRadius.circular(5)),
                   margin: const EdgeInsets.only(right: 20),
                   child: TextButton(

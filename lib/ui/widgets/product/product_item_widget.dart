@@ -18,61 +18,64 @@ class ProductItemWidget extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(10),
       margin: const EdgeInsets.all(5),
-      width: 170,
+      // width: 170,
+      height: 10,
+      width: MediaQuery.of(context).size.width * 0.35,
       color: Colors.black12,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              GestureDetector(
-                onTap: () {},
-                child: Image.network(
-                  item.imagePath,
-                  width: 170,
-                  height: 200,
-                  fit: BoxFit.cover,
-                ),
-              ),
-              const SizedBox(height: 10),
-              SizedBox(
-                height: 30,
-                child: Text(
-                  item.title,
-                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w300),
-                ),
-              ),
-              const SizedBox(height: 5),
-              Text(
-                item.discountInfo,
-                style: const TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w300,
-                ),
-              ),
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 5),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child: SizedBox(
+        height: 10,
+        child: ListView(
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Expanded(
-                  child: Text(
-                    "R\$ ${priceFormat.format(item.price)}",
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: AppColorsTheme.primaryColor,
-                    ),
+                GestureDetector(
+                  onTap: () {},
+                  child: Image.network(
+                    item.imagePath,
+                    width: double.infinity,
+                    height: MediaQuery.of(context).size.width * 0.5,
+                    fit: BoxFit.cover,
                   ),
                 ),
-                AddToCartWidget(item: item)
+                const SizedBox(height: 10),
+                SizedBox(
+                  height: 30,
+                  child: Text(
+                    item.title,
+                    style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w300),
+                  ),
+                ),
+                const SizedBox(height: 5),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 5),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Text(
+                          "R\$ ${priceFormat.format(item.price)}",
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: AppColorsTheme.primaryColor,
+                          ),
+                        ),
+                      ),
+                      AddToCartWidget(item: item)
+                    ],
+                  ),
+                ),
+                Text(
+                  item.discountInfo,
+                  style: const TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w300,
+                  ),
+                ),
               ],
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

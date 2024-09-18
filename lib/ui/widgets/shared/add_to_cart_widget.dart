@@ -37,8 +37,8 @@ class AddToCartWidget extends StatelessWidget {
           ScaffoldMessenger.of(context).showSnackBar(snackBar);
         },
         child: Container(
-          width: 50,
-          height: 32,
+          width: MediaQuery.of(context).size.width * 0.1,
+          height: MediaQuery.of(context).size.width * 0.08,
           decoration: BoxDecoration(
             color: Theme.of(context).primaryColor,
             borderRadius: BorderRadius.circular(5),
@@ -57,8 +57,8 @@ class AddToCartWidget extends StatelessWidget {
           ScaffoldMessenger.of(context).showSnackBar(snackBar);
         },
         child: Container(
-          width: 50,
-          height: 32,
+          width: MediaQuery.of(context).size.width * 0.1,
+          height: MediaQuery.of(context).size.width * 0.08,
           color: Colors.red,
           child: const Icon(Icons.remove_shopping_cart, color: Colors.white),
         ),
