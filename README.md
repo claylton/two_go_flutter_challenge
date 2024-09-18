@@ -4,6 +4,18 @@
 ## Running the Project
 To run the project on an emulator or physical device, follow these steps:
 
+- Clone the repository:
+
+
+```git clone https://github.com/yourusername/repository-name.git```
+
+
+```cd repository-two_go_flutter_challenge```
+
+- Install the dependencies:
+
+```flutter pub get```
+
 - Ensure the emulator is running or the device is connected. You can check the available devices with the following command:
 
 ```flutter devices```
