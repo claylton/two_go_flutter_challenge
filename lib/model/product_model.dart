@@ -5,6 +5,7 @@ class ProductItemModel {
   String discountInfo;
   int discountType;
   final double price;
+  double priceDiscount;
   int quantity;
   bool promotion;
 
@@ -15,6 +16,7 @@ class ProductItemModel {
     required this.discountInfo,
     required this.discountType,
     required this.price,
+    required this.priceDiscount,
     required this.quantity,
     required this.promotion,
   });
@@ -27,6 +29,7 @@ class ProductItemModel {
       discountInfo: json['discountInfo'],
       discountType: json['discountType'],
       price: json['price'].toDouble(),
+      priceDiscount: json['priceDiscount'].toDouble(),
       quantity: json['quantity'],
       promotion: json['promotion'],
     );
@@ -40,6 +43,7 @@ class ProductItemModel {
       'discountInfo': discountInfo,
       'discountType': discountType,
       'price': price,
+      'priceDiscount': priceDiscount,
       'quantity': quantity,
       'promotion': promotion
     };

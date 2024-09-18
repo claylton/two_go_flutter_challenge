@@ -68,6 +68,7 @@ class CartBloc extends ChangeNotifier {
       total -= pairs * (priceB * 2 - 1.25);
       for (var element in cart) {
         if (element.id == 'B') {
+          element.priceDiscount = (pairs * 1.25) + (itemCountB % 2 == 1 ? priceB : 0);
           element.promotion = true;
         }
       }
@@ -93,6 +94,7 @@ class CartBloc extends ChangeNotifier {
       total -= freeItems * 25;
       for (var element in cart) {
         if (element.id == 'C') {
+          element.priceDiscount = (itemCountC - freeItems) * 25;
           element.promotion = true;
         }
       }
@@ -124,7 +126,11 @@ class CartBloc extends ChangeNotifier {
     if (pairs > 0) {
       total -= pairs * (priceD + priceE - 3.00);
       for (var element in cart) {
-        if (element.id == 'D' || element.id == 'E') {
+        if (element.id == 'D') {
+          element.priceDiscount = (pairs * 1.50) + (itemCountD - pairs > 0 ? priceD : 0);
+          element.promotion = true;
+        } else if (element.id == 'E') {
+          element.priceDiscount = (pairs * 1.50) + (itemCountE - pairs > 0 ? priceE : 0);
           element.promotion = true;
         }
       }

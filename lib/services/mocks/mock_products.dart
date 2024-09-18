@@ -11,6 +11,7 @@ abstract class ProductsMock {
           "discountInfo": "",
           "discountType": 0,
           "price": 50.00,
+          "priceDiscount": 0,
           "quantity": 0,
           "promotion": false
         },
@@ -21,6 +22,7 @@ abstract class ProductsMock {
           "discountInfo": "2 por R\$1,25",
           "discountType": 1,
           "price": 75.00,
+          "priceDiscount": 0,
           "quantity": 0,
           "promotion": false
         },
@@ -31,6 +33,7 @@ abstract class ProductsMock {
           "discountInfo": "Compre 3, leve um grátis",
           "discountType": 2,
           "price": 25.00,
+          "priceDiscount": 0,
           "quantity": 0,
           "promotion": false
         },
@@ -41,6 +44,7 @@ abstract class ProductsMock {
           "discountInfo": "Compre D e E por R\$ 3",
           "discountType": 3,
           "price": 150.00,
+          "priceDiscount": 0,
           "quantity": 0,
           "promotion": false
         },
@@ -51,6 +55,7 @@ abstract class ProductsMock {
           "discountInfo": "Compre D e E por R\$ 3",
           "discountType": 4,
           "price": 200.00,
+          "priceDiscount": 0,
           "quantity": 0,
           "promotion": false
         },

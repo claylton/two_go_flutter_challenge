@@ -19,6 +19,7 @@ class AddToCartWidget extends StatelessWidget {
       title: item.title,
       quantity: 1,
       price: item.price,
+      priceDiscount: item.priceDiscount,
       imagePath: item.imagePath,
       discountInfo: item.discountInfo,
       discountType: item.discountType,

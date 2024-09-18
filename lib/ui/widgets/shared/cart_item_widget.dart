@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:two_go_flutter_challenge/blocs/cart_bloc.dart';
 import 'package:two_go_flutter_challenge/model/product_model.dart';
-
+import 'package:two_go_flutter_challenge/ui/themes/app_colors_theme.dart';
 
 class CartItemWidget extends StatelessWidget {
   final ProductItemModel item;
@@ -40,12 +40,39 @@ class CartItemWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(item.title),
-                  Text(
-                    item.promotion ? "Promoção aplicada" : "R\$ ${price.format(item.price)}",
-                    style: TextStyle(color: Theme.of(context).primaryColor),
-                  ),
-                  const SizedBox(height: 10),
-                  Text("R\$ ${price.format(item.price * item.quantity)}"),
+                  item.promotion
+                      ? Row(
+                          children: [
+                            Text(
+                              "R\$ ${price.format(item.price * item.quantity)}",
+                              maxLines: 1,
+                              style: const TextStyle(
+                                color: AppColorsTheme.greyColor,
+                                fontSize: 14,
+                                decoration: TextDecoration.lineThrough,
+                                decorationColor: AppColorsTheme.greyColor,
+                              ),
+                            ),
+                            const SizedBox(width: 10),
+                            Text(
+                              "R\$ ${price.format(item.priceDiscount)}",
+                              style: const TextStyle(color: AppColorsTheme.primaryColor),
+                            ),
+                          ],
+                        )
+                      : Text(
+                          "R\$ ${price.format(item.price * item.quantity)}",
+                          style: const TextStyle(color: AppColorsTheme.blackColor),
+                        ),
+                  item.promotion
+                      ? const Padding(
+                        padding: EdgeInsets.only(bottom: 5),
+                        child: Text(
+                            "Promoção aplicada",
+                            style: TextStyle(color: AppColorsTheme.primaryColor),
+                          ),
+                      )
+                      : const SizedBox(),
                   Container(
                     height: 35,
                     width: 120,
